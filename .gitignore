@@ -35,3 +35,10 @@ jspm_packages
 
 # Optional REPL history
 .node_repl_history
+
+# FeedlySlackBot project ignore
+.env
+gapps.config.json
+
+# Mac OS
+.DS_Store

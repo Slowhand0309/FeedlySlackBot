@@ -19,5 +19,12 @@
   "bugs": {
     "url": "https://github.com/Slowhand0309/FeedlySlackBot/issues"
   },
-  "homepage": "https://github.com/Slowhand0309/FeedlySlackBot#readme"
+  "homepage": "https://github.com/Slowhand0309/FeedlySlackBot#readme",
+  "devDependencies": {
+    "dotenv": "^2.0.0",
+    "grunt": "^1.0.1",
+    "grunt-ect": "^0.1.2",
+    "grunt-exec": "^1.0.0",
+    "node-google-apps-script": "^1.1.5"
+  }
 }
