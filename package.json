@@ -1,0 +1,23 @@
+{
+  "name": "feedly_slack_bot",
+  "version": "0.0.1",
+  "description": "Post unread article to slack by google apps script.",
+  "main": "main.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Slowhand0309/FeedlySlackBot.git"
+  },
+  "keywords": [
+    "slack",
+    "bot"
+  ],
+  "author": "Slowhand0309",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/Slowhand0309/FeedlySlackBot/issues"
+  },
+  "homepage": "https://github.com/Slowhand0309/FeedlySlackBot#readme"
+}
