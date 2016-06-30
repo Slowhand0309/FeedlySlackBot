@@ -26,7 +26,8 @@ module.exports = function(grunt) {
          'src/main.js' : ['template/main.js.ect']
        },
        variables: {
-         // TODO more...
+         // Access token.
+         accessToken: process.env.ACCESS_TOKEN,
          // User name.
          userName: process.env.USER_NAME,
          // Post Avatar icon url on slack.

@@ -1,0 +1,42 @@
+/**
+ * main.gs
+ *
+ * @author Slowhand0309
+ */
+
+
+var FeedlySlackBot = {
+
+  PROFILE_URL: 'https://cloud.feedly.com/v3/profile',
+
+  initialize: function() {
+  },
+
+  profile: function() {
+
+    var auth = 'OAuth <%= @accessToken %>';
+    var response = this.post(this.PROFILE_URL, null, auth);
+    Logger.log(response.getContentText("UTF-8"););
+  },
+
+  /**
+   * Post to url with payload.
+   *
+   * @param {String} url
+   * @param {Object} payload
+   * @return {Object} response
+   */
+  post: function(url, payload, auth) {
+
+    var options = {
+      'method' : 'POST',
+      'payload' : payload
+    };
+
+    if (auth) {
+      options.headers = {Authorization : auth};
+    }
+
+    return UrlFetchApp.fetch(url, options);
+  }
+};
