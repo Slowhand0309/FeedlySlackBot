@@ -4,18 +4,52 @@
  * @author Slowhand0309
  */
 
+/**
+ * Entry function.
+ */
+function exec() {
 
+}
+
+
+/**
+ * FeedlySlackBot object.
+ */
 var FeedlySlackBot = {
 
   PROFILE_URL: 'https://cloud.feedly.com/v3/profile',
 
+  UNREAD_COUNT_URL: 'https://cloud.feedly.com/v3/markers/counts',
+
   initialize: function() {
   },
 
+  /**
+   * Get auth string.
+   *
+   * @return {String}
+   */
+  auth: function() {
+    return 'OAuth <%= @accessToken %>';
+  },
+
+  /**
+   * Log out profile info.
+   */
   profile: function() {
 
-    var auth = 'OAuth <%= @accessToken %>';
+    var auth = this.auth();
     var response = this.get(this.PROFILE_URL, auth);
+    Logger.log(response.getContentText("UTF-8"));
+  },
+
+  /**
+   * Get unread feeds.
+   */
+  unread: function() {
+
+    var auth = this.auth();
+    var response = this.get(this.UNREAD_COUNT_URL, auth);
     Logger.log(response.getContentText("UTF-8"));
   },
 
