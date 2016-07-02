@@ -15,8 +15,25 @@ var FeedlySlackBot = {
   profile: function() {
 
     var auth = 'OAuth <%= @accessToken %>';
-    var response = this.post(this.PROFILE_URL, null, auth);
-    Logger.log(response.getContentText("UTF-8"););
+    var response = this.get(this.PROFILE_URL, auth);
+    Logger.log(response.getContentText("UTF-8"));
+  },
+
+  /**
+   * Get response with auth.
+   *
+   * @param {String} url
+   * @param {String} auth
+   */
+  get: function(url, auth) {
+    var headers = {'Authorization' : auth};
+    var options = {
+      'method' : 'get',
+      'contentType' : 'application/json;charset=utf-8',
+      'headers' : headers
+    };
+
+    return UrlFetchApp.fetch(url, options);
   },
 
   /**
@@ -24,18 +41,13 @@ var FeedlySlackBot = {
    *
    * @param {String} url
    * @param {Object} payload
-   * @return {Object} response
    */
-  post: function(url, payload, auth) {
+  post: function(url, payload) {
 
     var options = {
       'method' : 'POST',
       'payload' : payload
     };
-
-    if (auth) {
-      options.headers = {Authorization : auth};
-    }
 
     return UrlFetchApp.fetch(url, options);
   }
