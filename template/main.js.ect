@@ -50,7 +50,23 @@ var FeedlySlackBot = {
 
     var auth = this.auth();
     var response = this.get(this.UNREAD_COUNT_URL, auth);
-    Logger.log(response.getContentText("UTF-8"));
+
+    var feeds = [];
+    // Parse json.
+    var obj = JSON.parse(response.getContentText("UTF-8"));
+    var unreadcounts = obj.unreadcounts;
+    for (var i = 0; i < unreadcounts.length; i++) {
+      var unread = obj.unreadcounts[i];
+      if (unread.count > 0) {
+        Logger.log('unread => id : ' + unread.id + ', count : ' + unread.count);
+        feeds.push(unread);
+      }
+    }
+
+    if (feeds.length == 0) {
+      Logger.log('Unread feed not found.');
+      return;
+    }
   },
 
   /**
