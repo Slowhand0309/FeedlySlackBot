@@ -21,6 +21,8 @@ var FeedlySlackBot = {
 
   UNREAD_COUNT_URL: 'https://cloud.feedly.com/v3/markers/counts',
 
+  STREAM_URL: 'https://cloud.feedly.com/v3/streams/contents?streamId=',
+
   initialize: function() {
   },
 
@@ -67,6 +69,29 @@ var FeedlySlackBot = {
       Logger.log('Unread feed not found.');
       return;
     }
+
+    this.stream(feeds);
+  },
+
+  /**
+   * Collect unread streams.
+   *
+   * @param {Array} unreads
+   */
+  stream: function(unreads) {
+
+    var streams = {};
+
+    var auth = this.auth();
+    for (var i = 0; i < unreads.length; i++) {
+      var id = unreads[i].id;
+      var response = this.get(this.STREAM_URL + id, auth);
+
+      var obj = JSON.parse(response.getContentText("UTF-8"));
+      streams[id] = obj;
+    }
+
+    Logger.log(streams);
   },
 
   /**
