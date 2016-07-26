@@ -41,6 +41,8 @@ Preparing the `.env` file with the following key-value.
 |key|describe|
 |:--|:-------|
 |GAS_PROJECT_KEY|Project key at Google Apps Script|
+|ACCESS_TOKEN|Feedly access token|
+|POST_CHANNEL|Post slack channel|
 |USER_NAME|User name to post|
 |ICON_URL|Icon URL to post|
 |SLACK_URL|Slack URL to post|

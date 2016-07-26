@@ -28,6 +28,8 @@ module.exports = function(grunt) {
        variables: {
          // Access token.
          accessToken: process.env.ACCESS_TOKEN,
+         // Post channel.
+         postChannel: process.env.POST_CHANNEL,
          // User name.
          userName: process.env.USER_NAME,
          // Post Avatar icon url on slack.
