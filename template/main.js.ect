@@ -107,9 +107,9 @@ var FeedlySlackBot = {
     for (key in streams) {
       var payload = {
         'text': streams[key].title + '\n' + streams[key].href,
-        'channel': '#general',
-        'username': 'L',
-        'icon_url': 'http://kyarasozai.itemu.info/imgii/l_sit.png'
+        'channel': '<%= @postChannel %>',
+        'username': '<%= @userName %>',
+        'icon_url': '<%= @iconUrl %>'
       };
       var r = this.post(this.SLACK_URL, payload);
       Logger.log(r.getContentText("UTF-8"));
