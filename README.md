@@ -38,32 +38,36 @@ Preparing the `.env` file with the following key-value.
 
 次に以下のKey-Valueでプロジェクト直下に`.env`ファイルを作成します。
 
-|key|describe|
-|:--|:-------|
-|GAS_PROJECT_KEY|Project key at Google Apps Script|
-|ACCESS_TOKEN|Feedly access token|
-|POST_CHANNEL|Post slack channel|
-|USER_NAME|User name to post|
-|ICON_URL|Icon URL to post|
-|SLACK_URL|Slack URL to post|
+|key|describe|説明|
+|:--|:-------|:--|
+|GAS_PROJECT_KEY|Project key at Google Apps Script|Google Apps Scriptのプロジェクトキー|
+|ACCESS_TOKEN|Feedly access token|Feedlyのアクセストークン|
+|POST_CHANNEL|Post slack channel|ポストするSlackのチャンネル|
+|USER_NAME|User name to post|ポストするBot名|
+|ICON_URL|Icon URL to post|ポストするBotのアイコンURL|
+|SLACK_URL|Slack URL to post|ポストするSlackのURL|
+|MAX_FEED_POST|Max feed post|ポストするfeed毎の最大件数|
 
 ## Usage
 
 使用方法
 
-Synchronized with the project of Google apps script.
+Synchronized with the project of Google apps script.<br>
+Google apps scriptプロジェクトと同期します。
 
 ```sh
 $ grunt init
 ```
 
-Generate script file `main.js` by template.
+Generate script file `main.js` by template.<br>
+テンプレートから`main.js`を作成します。
 
 ```sh
 $ grunt
 ```
 
-Deploy script file.
+Deploy script file.<br>
+`main.js`をアップロードします。
 
 ```sh
 $ grunt upload

@@ -35,7 +35,9 @@ module.exports = function(grunt) {
          // Post Avatar icon url on slack.
          iconUrl: process.env.ICON_URL,
          // Post slack url.
-         slackUrl: process.env.SLACK_URL
+         slackUrl: process.env.SLACK_URL,
+         // Max feed post.
+         maxFeedPost: process.env.MAX_FEED_POST || 1
        }
      }
    }

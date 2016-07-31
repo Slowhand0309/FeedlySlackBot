@@ -61,7 +61,7 @@ var FeedlySlackBot = {
     var unreadcounts = obj.unreadcounts;
     for (var i = 0; i < unreadcounts.length; i++) {
       var unread = obj.unreadcounts[i];
-      if (unread.count > 0) {
+      if (unread.count > 0 && unread.id.indexOf('feed/') > -1) {
         Logger.log('unread => id : ' + unread.id + ', count : ' + unread.count);
         feeds.push(unread);
       }
@@ -80,39 +80,45 @@ var FeedlySlackBot = {
    *
    * @param {Array} unreads
    */
-  stream: function(unreads) {
+   stream: function(unreads) {
 
-    var streams = {};
+     var streams = {};
 
-    var auth = this.auth();
-    for (var i = 0; i < unreads.length; i++) {
-      var id = unreads[i].id;
-      var response = this.get(this.STREAM_URL + id + '&count=1', auth);
+     var auth = this.auth();
+     for (var i = 0; i < unreads.length; i++) {
+       var id = unreads[i].id;
+       var response = this.get(this.STREAM_URL + id + '&count=<%= @maxFeedPost %>', auth);
 
-      var obj = JSON.parse(response.getContentText("UTF-8"));
-      var table = {};
-      for (var j = 0; j < obj.items.length; j++) {
-        var item = obj.items[j];
-        table['title'] = item.title;
-        table['href'] = item.alternate[0].href;
-      }
-      streams[id] = table;
-    }
+       var obj = JSON.parse(response.getContentText("UTF-8"));
+       var table = [];
+       for (var j = 0; j < obj.items.length; j++) {
+         var item = obj.items[j];
+         var content = {
+           'title': item.title,
+           'href': item.alternate[0].href
+         }
+         table.push(content);
+       }
+       streams[id] = table;
+     }
 
-    this.postSlack(streams);
-  },
+     this.postSlack(streams);
+   },
 
   postSlack: function(streams) {
 
     for (key in streams) {
-      var payload = {
-        'text': streams[key].title + '\n' + streams[key].href,
-        'channel': '<%= @postChannel %>',
-        'username': '<%= @userName %>',
-        'icon_url': '<%= @iconUrl %>'
-      };
-      var r = this.post(this.SLACK_URL, payload);
-      Logger.log(r.getContentText("UTF-8"));
+      var table = streams[key];
+      for (var i = 0; i < table.length; i++) {
+        var payload = {
+          'text': table[i].title + '\n' + table[i].href,
+          'channel': '<%= @postChannel %>',
+          'username': '<%= @userName %>',
+          'icon_url': '<%= @iconUrl %>'
+        };
+        var r = this.post(this.SLACK_URL, payload);
+        Logger.log(r.getContentText("UTF-8"));
+      }
     }
   },
 
